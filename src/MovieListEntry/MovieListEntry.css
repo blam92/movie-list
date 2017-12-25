@@ -11,7 +11,7 @@ ul {
  
 h3 {
   font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
-  float: right;
+  padding-left: 15px;
 }
  
 li img {
@@ -21,7 +21,6 @@ li img {
  
 li p {
   font: 200 12px/1.5 Georgia, Times New Roman, serif;
-  clear: both;
 }
  
 li {
@@ -32,4 +31,9 @@ li {
 li:hover {
   background: #eee;
   cursor: pointer;
+}
+
+.thumbnail {
+  width: 20%;
+  height: 20%;
 }

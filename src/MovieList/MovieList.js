@@ -12,16 +12,35 @@ const hardCodedList = [
 class MovieList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      value: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
   }
   
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
   render() {
     const listEntries = hardCodedList.map((movie) => {
       return <MovieListEntry name={movie.name} text={movie.text} imgSource={movie.imgSource}/>
     });
 
-    return <ul>
-      {listEntries}
-    </ul>
+    return(
+    <div>
+      <p>test: {this.state.value} </p>
+      <div className="search-bar"> 
+        <span>Search Movie: </span>
+        <input value={this.state.value} type="text" name="search" onChange={this.handleChange}/>
+      </div>
+      
+      <ul>
+        {listEntries}
+      </ul>
+    </div> 
+    );
   }
 }
 
