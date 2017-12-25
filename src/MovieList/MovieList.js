@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MovieListEntry from '../MovieListEntry/MovieListEntry';
 import './MovieList.css';
+import AddMovie from '../AddMovie/AddMovie';
 
 const hardCodedList = [
   {name: 'Mean Girls', text: 'Girly Movie', imgSource: 'mean-girls.jpg'},
@@ -13,29 +14,38 @@ class MovieList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      searchedValue: '',
+      movies: hardCodedList
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.addMovieToList = this.addMovieToList.bind(this);
   }
   
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({searchedValue: event.target.value});
+  }
+
+  addMovieToList(movie) {
+    hardCodedList.push(movie);
+    this.setState({
+      movies: hardCodedList
+    });
   }
 
   render() {
-    const listEntries = hardCodedList.map((movie) => {
+    const listEntries = this.state.movies.map((movie) => {
       return <MovieListEntry name={movie.name} text={movie.text} imgSource={movie.imgSource}/>
     });
     const filteredListEntries = listEntries.filter((element) => {
-      return element.props.name.includes(this.state.value);
+      return element.props.name.includes(this.state.searchedValue);
     });
 
     return(
     <div>
+      <AddMovie addMovieToList={this.addMovieToList}/>
       <div className="search-bar"> 
-        <span>Search Movie: </span>
-        <input value={this.state.value} type="text" name="search" onChange={this.handleChange}/>
+        <input placeholder="Search Movie..." value={this.state.searchedValue} type="text" name="search" onChange={this.handleChange} className="form-control"/>
       </div>
       
       <ul>
