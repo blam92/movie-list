@@ -4,20 +4,38 @@ import './MovieListEntry.css';
 class MovieListEntry extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      selected: false
+    }
+
+    this.addToWatchList = this.addToWatchList.bind(this);
+    this.showDetails = this.showDetails.bind(this);
   }
 
-  handleClick(event) {
+  addToWatchList(event) {
     this.props.addToWatchList(this.props.index);
   }
 
+  showDetails() {
+    this.setState({
+      selected: !this.state.selected
+    });
+  }
   render() {
+
     return (
-      <li className="list-group-item" onClick={this.handleClick}>
-          <img className="thumbnail" src={"/images/" + this.props.imgSource} alt={this.props.name} />
-          <h3> {this.props.name} </h3>
-          <p> {this.props.text} </p>
-          {this.props.toWatch && <p><b>Need To Watch This</b></p>}
+      <li className="list-group-item">
+          <h3 onClick={this.showDetails}> {this.props.name} </h3>
+          {this.state.selected &&
+          <div>
+            <hr/>
+            <img className="thumbnail" src={"/images/" + this.props.imgSource} alt={this.props.name}/>
+            <p> {this.props.text} </p>
+            {this.props.toWatch ? 
+            <button id="add-to-list" className="btn btn-success" onClick={this.addToWatchList}>Added to watchlist</button> : 
+            <button id="add-to-list" className="btn btn-default" onClick={this.addToWatchList}>Add to watchlist</button> }
+          </div>
+          }
       </li>
     );
   }

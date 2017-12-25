@@ -18,7 +18,7 @@ class MovieList extends Component {
     this.state = {
       searchedValue: '',
       movies: hardCodedList,
-      toWatchTabSelected: false
+      toWatchTabSelected: false,
     }
 
     this.handleChange = this.handleChange.bind(this);

@@ -12,6 +12,7 @@ ul {
 h3 {
   font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
   padding-left: 15px;
+  cursor: pointer;
 }
  
 li img {
@@ -30,10 +31,19 @@ li {
  
 li:hover {
   background: #eee;
-  cursor: pointer;
 }
 
 .thumbnail {
   width: 20%;
   height: 20%;
+}
+
+hr {
+  border-width: 2px;
+}
+
+#add-to-list {
+  width: 25%;
+  font-size: 10px;
+  float: right;
 }
