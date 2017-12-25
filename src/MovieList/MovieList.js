@@ -27,17 +27,19 @@ class MovieList extends Component {
     const listEntries = hardCodedList.map((movie) => {
       return <MovieListEntry name={movie.name} text={movie.text} imgSource={movie.imgSource}/>
     });
+    const filteredListEntries = listEntries.filter((element) => {
+      return element.props.name.includes(this.state.value);
+    });
 
     return(
     <div>
-      <p>test: {this.state.value} </p>
       <div className="search-bar"> 
         <span>Search Movie: </span>
         <input value={this.state.value} type="text" name="search" onChange={this.handleChange}/>
       </div>
       
       <ul>
-        {listEntries}
+        {filteredListEntries}
       </ul>
     </div> 
     );
