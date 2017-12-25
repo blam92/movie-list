@@ -16,12 +16,14 @@ class MovieList extends Component {
     super(props);
     this.state = {
       searchedValue: '',
-      movies: hardCodedList
+      movies: hardCodedList,
+      toWatchTabSelected: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.addMovieToList = this.addMovieToList.bind(this);
     this.addToWatchList = this.addToWatchList.bind(this);
+    this.changeTab = this.changeTab.bind(this);
   }
   
   handleChange(event) {
@@ -42,6 +44,12 @@ class MovieList extends Component {
     });
   }
 
+  changeTab() {
+    this.setState({
+      toWatchTabSelected: !this.state.toWatchTabSelected
+    });
+  }
+
   render() {
     const listEntries = this.state.movies.map((movie, index) => {
       return <MovieListEntry name={movie.name} text={movie.text} 
@@ -49,7 +57,11 @@ class MovieList extends Component {
       key={index} index={index} addToWatchList={this.addToWatchList}/>
     });
     const filteredListEntries = listEntries.filter((element) => {
-      return element.props.name.includes(this.state.searchedValue);
+      if(this.state.toWatchTabSelected) {
+        return element.props.name.includes(this.state.searchedValue) && element.props.toWatch;
+      } else {
+        return element.props.name.includes(this.state.searchedValue);
+      }
     });
 
     return(
@@ -59,7 +71,7 @@ class MovieList extends Component {
         <input placeholder="Search Movie..." value={this.state.searchedValue} type="text" name="search" onChange={this.handleChange} className="form-control"/>
       </div>
       
-      <MovieTab/>
+      <MovieTab toWatchTabSelected={this.state.toWatchTabSelected} changeTab={this.changeTab}/>
       <ul className="list-group">
         {filteredListEntries}
       </ul>
