@@ -16,7 +16,7 @@ class AddMovie extends Component {
   }
 
   handleClick(event) {
-    let movie = {name: this.state.value, text: 'hardcodedMovie', imgSource: 'placeholder.png'}
+    let movie = {name: this.state.value, text: 'hardcodedMovie', imgSource: 'placeholder.png', toWatch: false}
     this.props.addMovieToList(movie);
     this.setState({
       value: ''

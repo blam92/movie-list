@@ -3,6 +3,7 @@ import MovieListEntry from '../MovieListEntry/MovieListEntry';
 import './MovieList.css';
 import AddMovie from '../AddMovie/AddMovie';
 import MovieTab from '../MovieTab/MovieTab';
+import NoMovies from '../NoMovies/NoMovies';
 
 const hardCodedList = [
   {name: 'Mean Girls', text: 'Girly Movie', imgSource: 'mean-girls.jpg', toWatch: true},
@@ -64,6 +65,9 @@ class MovieList extends Component {
       }
     });
 
+    const moviesFound = filteredListEntries.length > 0 ? filteredListEntries : <NoMovies/>;
+    console.log(moviesFound);
+
     return(
     <div>
       <AddMovie addMovieToList={this.addMovieToList}/>
@@ -73,7 +77,7 @@ class MovieList extends Component {
       
       <MovieTab toWatchTabSelected={this.state.toWatchTabSelected} changeTab={this.changeTab}/>
       <ul className="list-group">
-        {filteredListEntries}
+        {moviesFound}
       </ul>
     </div> 
     );
