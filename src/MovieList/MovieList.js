@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import MovieListEntry from '../MovieListEntry/MovieListEntry';
 import './MovieList.css';
 import AddMovie from '../AddMovie/AddMovie';
+import MovieTab from '../MovieTab/MovieTab';
 
 const hardCodedList = [
-  {name: 'Mean Girls', text: 'Girly Movie', imgSource: 'mean-girls.jpg'},
-  {name: 'Hackers', text: 'Hacker Movie?', imgSource: 'hackers.jpg'},
-  {name: 'The Grey', text: 'A Grey Movie', imgSource: 'the-grey.jpg'},
-  {name: 'Star Wars', text: 'Luke I am your father!', imgSource: 'star-wars.jpg'}
+  {name: 'Mean Girls', text: 'Girly Movie', imgSource: 'mean-girls.jpg', toWatch: true},
+  {name: 'Hackers', text: 'Hacker Movie?', imgSource: 'hackers.jpg', toWatch: false},
+  {name: 'The Grey', text: 'A Grey Movie', imgSource: 'the-grey.jpg', toWatch: false},
+  {name: 'Star Wars', text: 'Luke I am your father!', imgSource: 'star-wars.jpg', toWatch: false}
 ];
 
 class MovieList extends Component {
@@ -20,6 +21,7 @@ class MovieList extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addMovieToList = this.addMovieToList.bind(this);
+    this.addToWatchList = this.addToWatchList.bind(this);
   }
   
   handleChange(event) {
@@ -33,9 +35,18 @@ class MovieList extends Component {
     });
   }
 
+  addToWatchList(index) {
+    hardCodedList[index].toWatch = !hardCodedList[index].toWatch;
+    this.setState({
+      movies: hardCodedList
+    });
+  }
+
   render() {
-    const listEntries = this.state.movies.map((movie) => {
-      return <MovieListEntry name={movie.name} text={movie.text} imgSource={movie.imgSource}/>
+    const listEntries = this.state.movies.map((movie, index) => {
+      return <MovieListEntry name={movie.name} text={movie.text} 
+      imgSource={movie.imgSource} toWatch={movie.toWatch} 
+      key={index} index={index} addToWatchList={this.addToWatchList}/>
     });
     const filteredListEntries = listEntries.filter((element) => {
       return element.props.name.includes(this.state.searchedValue);
@@ -48,7 +59,8 @@ class MovieList extends Component {
         <input placeholder="Search Movie..." value={this.state.searchedValue} type="text" name="search" onChange={this.handleChange} className="form-control"/>
       </div>
       
-      <ul>
+      <MovieTab/>
+      <ul className="list-group">
         {filteredListEntries}
       </ul>
     </div> 
