@@ -66,19 +66,18 @@ class MovieList extends Component {
     });
 
     const moviesFound = filteredListEntries.length > 0 ? filteredListEntries : <NoMovies/>;
-
     return(
-    <div>
-      <AddMovie addMovieToList={this.addMovieToList}/>
-      <div className="search-bar"> 
-        <input placeholder="Search Movie..." value={this.state.searchedValue} type="text" name="search" onChange={this.handleChange} className="form-control"/>
-      </div>
-      
-      <MovieTab toWatchTabSelected={this.state.toWatchTabSelected} changeTab={this.changeTab}/>
-      <ul className="list-group">
-        {moviesFound}
-      </ul>
-    </div> 
+      <div>
+        <AddMovie addMovieToList={this.addMovieToList} toWatchTab={this.state.toWatchTabSelected}/>
+        <div className="search-bar"> 
+          <input placeholder="Search Movie..." value={this.state.searchedValue} type="text" name="search" onChange={this.handleChange} className="form-control"/>
+        </div>
+        
+        <MovieTab toWatchTabSelected={this.state.toWatchTabSelected} changeTab={this.changeTab}/>
+        <ul className="list-group">
+          {moviesFound}
+        </ul>
+      </div> 
     );
   }
 }

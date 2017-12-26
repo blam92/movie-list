@@ -21,6 +21,9 @@ class AddMovie extends Component {
       value: ''
     });
     MovieDB.get(this.state.value, (movie) => {
+      if(this.props.toWatchTab) {
+        movie.toWatch = true;
+      }
       this.props.addMovieToList(movie);
     });
   }
