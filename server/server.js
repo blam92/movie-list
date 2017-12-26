@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const controller = require('./controller');
 
 const hardCodedList = [
   {name: 'Mean Girls', text: 'Girly Movie', imgSource: 'mean-girls.jpg', toWatch: true},
@@ -19,7 +20,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/movies', (req, res) => {
-  res.status(200).json(hardCodedList);
+  controller.get().then((movies) => {
+    console.log(movies);
+    res.status(200).json(movies);
+  });
 });
 app.listen(8080, () => {
   console.log('App running in port 8080');
