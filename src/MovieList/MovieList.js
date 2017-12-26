@@ -4,20 +4,17 @@ import './MovieList.css';
 import AddMovie from '../AddMovie/AddMovie';
 import MovieTab from '../MovieTab/MovieTab';
 import NoMovies from '../NoMovies/NoMovies';
+import $ from 'jquery';
 
-const hardCodedList = [
-  {name: 'Mean Girls', text: 'Girly Movie', imgSource: 'mean-girls.jpg', toWatch: true},
-  {name: 'Hackers', text: 'Hacker Movie?', imgSource: 'hackers.jpg', toWatch: false},
-  {name: 'The Grey', text: 'A Grey Movie', imgSource: 'the-grey.jpg', toWatch: false},
-  {name: 'Star Wars', text: 'Luke I am your father!', imgSource: 'star-wars.jpg', toWatch: false}
-];
+const SERVER_URL = 'http://127.0.0.1:8080';
+const GET_MOVIES = '/api/movies';
 
 class MovieList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchedValue: '',
-      movies: hardCodedList,
+      movies: [],
       toWatchTabSelected: false,
     }
 
@@ -27,21 +24,28 @@ class MovieList extends Component {
     this.changeTab = this.changeTab.bind(this);
   }
   
+  componentDidMount() {
+    $.get(SERVER_URL + GET_MOVIES, (results, status) => {
+      this.setState({
+        movies: results
+      });
+    });
+  }
   handleChange(event) {
     this.setState({searchedValue: event.target.value});
   }
 
   addMovieToList(movie) {
-    hardCodedList.push(movie);
     this.setState({
-      movies: hardCodedList
+      movies: this.state.movies.concat([movie])
     });
   }
 
   addToWatchList(index) {
-    hardCodedList[index].toWatch = !hardCodedList[index].toWatch;
+    let updatedList = this.state.movies.slice();
+    updatedList[index].toWatch = !updatedList[index].toWatch
     this.setState({
-      movies: hardCodedList
+      movies: updatedList
     });
   }
 
