@@ -66,7 +66,6 @@ class MovieList extends Component {
     });
 
     const moviesFound = filteredListEntries.length > 0 ? filteredListEntries : <NoMovies/>;
-    console.log(moviesFound);
 
     return(
     <div>

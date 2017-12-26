@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './AddMovie.css';
+import MovieDB from '../MovieDBController/MovieDBController';
 
 class AddMovie extends Component {
   constructor(props) {
@@ -16,10 +17,11 @@ class AddMovie extends Component {
   }
 
   handleClick(event) {
-    let movie = {name: this.state.value, text: 'hardcodedMovie', imgSource: 'placeholder.png', toWatch: false}
-    this.props.addMovieToList(movie);
     this.setState({
       value: ''
+    });
+    MovieDB.get(this.state.value, (movie) => {
+      this.props.addMovieToList(movie);
     });
   }
 

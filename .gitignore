@@ -22,3 +22,6 @@ yarn-error.log*
 
 #vm
 .vscode
+
+#API_KEY
+config.js

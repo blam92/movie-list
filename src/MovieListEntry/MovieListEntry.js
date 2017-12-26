@@ -29,7 +29,7 @@ class MovieListEntry extends Component {
           {this.state.selected &&
           <div>
             <hr/>
-            <img className="thumbnail" src={"/images/" + this.props.imgSource} alt={this.props.name}/>
+            <img className="thumbnail" src={this.props.imgSource} alt={this.props.name}/>
             <p> {this.props.text} </p>
             {this.props.toWatch ? 
             <button id="add-to-list" className="btn btn-success" onClick={this.addToWatchList}>Added to watchlist</button> : 
