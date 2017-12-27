@@ -8,11 +8,13 @@
     "install": "^0.10.2",
     "jquery": "^3.2.1",
     "mysql": "^2.15.0",
+    "mysql2": "^1.5.1",
     "npm": "^5.6.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17",
+    "sequelize": "^4.28.6",
     "underscore": "^1.8.3"
   },
   "scripts": {
