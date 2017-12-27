@@ -35,7 +35,6 @@ class MovieList extends Component {
   _isDuplicated(movie) {
     let isDuplicated = false;
     this.state.movies.forEach((val, index) => {
-      console.log(val);
       if(val.id === movie.id) {
         isDuplicated = true;
         return; 
@@ -45,7 +44,6 @@ class MovieList extends Component {
   }
 
   addMovieToList(movie) {
-    console.log(movie);
     if(this._isDuplicated(movie)) {
       return null;
     }

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const controller = require('./controller');
+const path = require('path');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -9,9 +10,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello Word');
-});
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('/api/movies', (req, res) => {
   controller.get().then((movies) => {
