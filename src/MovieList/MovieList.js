@@ -32,7 +32,24 @@ class MovieList extends Component {
     this.setState({searchedValue: event.target.value});
   }
 
+  _isDuplicated(movie) {
+    let isDuplicated = false;
+    this.state.movies.forEach((val, index) => {
+      console.log(val);
+      if(val.id === movie.id) {
+        isDuplicated = true;
+        return; 
+      }
+    });
+    return isDuplicated;
+  }
+
   addMovieToList(movie) {
+    console.log(movie);
+    if(this._isDuplicated(movie)) {
+      return null;
+    }
+
     this.setState({
       movies: this.state.movies.concat([movie])
     });
