@@ -62,6 +62,7 @@ class MovieList extends Component {
     this.setState({
       movies: updatedList
     });
+    request.put(this.state.movies[index]);
   }
 
   changeTab() {

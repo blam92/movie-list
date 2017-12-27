@@ -26,6 +26,17 @@ let request = {
         }
       });
     });
+  },
+
+  put: (movie) => {
+    $.ajax({
+      type: "PUT",
+      url: SERVER_URL + MOVIES + '/' + movie.id,
+      data: JSON.stringify(movie),
+      success: () => console.log('updating movie:', movie),
+      reject: (err) => console.log('PUT error: ', err),
+      dataType: 'json'
+    });
   }
 };
 

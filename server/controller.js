@@ -34,3 +34,19 @@ exports.post = (req, res) => {
     });
   });
 }
+
+exports.put = (req, res) => {
+  return new Promise((resolve, reject) => {
+    let movie = '';
+    req.on('data', (chunk) => {
+      movie += chunk
+    });
+    req.on('end', () => {
+      dbController.updateMovie(JSON.parse(movie)).then((result) => {
+        resolve(result);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  });
+}

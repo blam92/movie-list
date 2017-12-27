@@ -26,3 +26,16 @@ exports.saveMovieInDB = (movie) => {
     });
   });
 }
+
+exports.updateMovie = (movie) => {
+  return new Promise((resolve, reject) => {
+    let q = `UPDATE movies SET to_watch = ${movie.toWatch} WHERE ${movie.id} = id`
+    db.connection.query(q, (err, result) => {
+      if(err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};

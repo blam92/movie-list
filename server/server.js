@@ -5,6 +5,7 @@ const controller = require('./controller');
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
   next();
 });
 
@@ -26,7 +27,9 @@ app.post('/api/movies', (req, res) => {
 
 app.put('/api/movies/:movieId', (req, res) => {
   console.log(req.params);
-  res.status(200).json(req.params);
+  controller.put(req, res).then(() => {
+    res.status(200).json(req.params);
+  });
 });
 
 
