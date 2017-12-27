@@ -10,7 +10,15 @@ app.use(function(req, res, next) {
   next();
 });
 
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, '../client/build')));
+||||||| merged common ancestors
+app.get('/', (req, res) => {
+  res.send('Hello Word');
+});
+=======
+app.use(express.static(path.join(__dirname, '../build')));
+>>>>>>> 1d5603fe7e3d125a1049fd7d3db03ef4c23d7b17
 
 app.get('/api/movies', (req, res) => {
   controller.get().then((movies) => {
