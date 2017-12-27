@@ -9,7 +9,7 @@ let MovieDB = {
     $.get(DB_URL + movie, function(data) {
       let movieData = data.results[0];
       console.log(movieData);
-      let movie = {name: movieData.original_title, text: movieData.overview, imgSource: IMG_URL + movieData.poster_path, toWatch: false};
+      let movie = {name: movieData.original_title, text: movieData.overview, imgSource: IMG_URL + movieData.poster_path, toWatch: false, id: movieData.id};
       callback(movie);
     });
   }
