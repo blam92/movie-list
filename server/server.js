@@ -20,7 +20,7 @@ app.get('/api/movies', (req, res) => {
 
 app.post('/api/movies', (req, res) => {
   controller.post(req, res).then(() => {
-    res.status(200).json({});
+    res.status(201).json({});
   });
 });
 

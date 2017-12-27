@@ -7,7 +7,9 @@ exports.get = () => {
         return {
             name: value.title,
             text: value.description,
-            imgSource: value.img_source
+            imgSource: value.img_source,
+            id: value.id,
+            toWatch: value.to_watch
           }
       });
       resolve(movieList);

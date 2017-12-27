@@ -16,7 +16,7 @@ exports.getMoviesFromDB = () => {
 
 exports.saveMovieInDB = (movie) => {
   return new Promise((resolve, reject) => {
-    let q = `INSERT INTO movies (title, description, img_source) VALUES ('${movie.name}', '${movie.text}', '${movie.imgSource}')`;
+    let q = `INSERT INTO movies (title, description, img_source, to_watch) VALUES ("${movie.name}", "${movie.text}", "${movie.imgSource}", ${movie.toWatch})`;
     db.connection.query(q, (err, result) => {
       if(err) {
         reject(err);
