@@ -24,6 +24,11 @@ app.post('/api/movies', (req, res) => {
   });
 });
 
+app.put('/api/movies/:movieId', (req, res) => {
+  console.log(req.params);
+  res.status(200).json(req.params);
+});
+
 
 app.listen(8080, () => {
   console.log('App running in port 8080');

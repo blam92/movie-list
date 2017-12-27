@@ -4,10 +4,7 @@ import './MovieList.css';
 import AddMovie from '../AddMovie/AddMovie';
 import MovieTab from '../MovieTab/MovieTab';
 import NoMovies from '../NoMovies/NoMovies';
-import $ from 'jquery';
-
-const SERVER_URL = 'http://127.0.0.1:8080';
-const MOVIES = '/api/movies';
+import request from '../Requests/requests';
 
 class MovieList extends Component {
   constructor(props) {
@@ -25,7 +22,7 @@ class MovieList extends Component {
   }
   
   componentDidMount() {
-    $.get(SERVER_URL + MOVIES, (results, status) => {
+    request.get().then((results) => {
       this.setState({
         movies: results
       });
@@ -39,15 +36,7 @@ class MovieList extends Component {
     this.setState({
       movies: this.state.movies.concat([movie])
     });
-    console.log(movie);
-    $.ajax({
-      type: "POST",
-      url: SERVER_URL + MOVIES,
-      data: JSON.stringify(movie),
-      success: () => console.log('movie sent to server:', movie),
-      reject: (err) => console.log('POST error: ', err),
-      dataType: 'json'
-    });
+    request.post(movie);
   }
 
   addToWatchList(index) {

@@ -3,6 +3,7 @@ import $ from 'jquery';
 const DB_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
 const IMG_URL = 'http://image.tmdb.org/t/p/w185/'
 
+
 let MovieDB = {
   get(movie, callback) {
     $.get(DB_URL + movie, function(data) {
