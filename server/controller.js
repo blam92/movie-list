@@ -17,4 +17,18 @@ exports.get = () => {
   });
 }
 
-exports.get();
+exports.post = (req, res) => {
+  return new Promise((resolve, reject) => {
+    let movie = '';
+    req.on('data', (chunk) => {
+      movie += chunk
+    });
+    req.on('end', () => {
+      dbController.saveMovieInDB(JSON.parse(movie)).then((result) => {
+        resolve(result);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  });
+}
